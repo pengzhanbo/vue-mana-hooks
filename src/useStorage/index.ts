@@ -67,11 +67,11 @@ export function useStorage<T = unknown>(
  * @param options
  * @returns
  */
-export function useStorage<T extends (string | number | boolean | object | null)>(
+export function useStorage<T extends string | number | boolean | object | null>(
   key: string,
   defaults: MaybeComputedRef<T>,
   storage: StorageLike | undefined,
-  options: UseStorageOptions<T> = {},
+  options: UseStorageOptions<T> = {}
 ): RemovableRef<T> {
   const {
     deep = false,
@@ -85,19 +85,20 @@ export function useStorage<T extends (string | number | boolean | object | null)
 
   const data = (shallow ? shallowRef : ref)(defaults) as RemovableRef<T>
 
-  if (!storage && isClient)
-    storage = window.localStorage
+  if (!storage && isClient) storage = window.localStorage
 
-  if (!storage)
-    return data
+  if (!storage) return data
 
   const rawInit: T = resolveUnref(defaults)
   const isWatchStorage = ref(false)
 
-  watch(data, () => {
-    if (isWatchStorage.value)
-      write(data.value)
-  }, { flush: 'pre', deep })
+  watch(
+    data,
+    () => {
+      if (isWatchStorage.value) write(data.value)
+    },
+    { flush: 'pre', deep }
+  )
 
   if (isClient && watchStorage)
     window.addEventListener('storage', update, false)
@@ -108,19 +109,15 @@ export function useStorage<T extends (string | number | boolean | object | null)
 
   function write(v: any) {
     try {
-      if (v === null || v === undefined)
-        storage!.removeItem(key)
-      else
-        storage!.setItem(key, serializer.write(v))
-    }
-    catch (e) {
+      if (v === null || v === undefined) storage!.removeItem(key)
+      else storage!.setItem(key, serializer.write(v))
+    } catch (e) {
       onError(e)
     }
   }
 
   function read(event?: StorageEvent) {
-    if (event && event.key !== key)
-      return
+    if (event && event.key !== key) return
     isWatchStorage.value = false
 
     try {
@@ -129,33 +126,26 @@ export function useStorage<T extends (string | number | boolean | object | null)
         if (writeDefaults && rawInit !== null)
           storage!.setItem(key, serializer.write(rawInit))
         return rawInit
-      }
-      else if (!event && mergeDefaults) {
+      } else if (!event && mergeDefaults) {
         const value = serializer.read(rawValue)
-        if (isFunction(mergeDefaults))
-          return mergeDefaults(value, rawInit)
+        if (isFunction(mergeDefaults)) return mergeDefaults(value, rawInit)
         else if (typeof rawInit === 'object' && !Array.isArray(value))
           return { ...rawInit, ...value }
         return value
-      }
-      else if (typeof rawValue !== 'string') {
+      } else if (typeof rawValue !== 'string') {
         return rawValue
-      }
-      else {
+      } else {
         return serializer.read(rawValue)
       }
-    }
-    catch (e) {
+    } catch (e) {
       onError(e)
-    }
-    finally {
+    } finally {
       isWatchStorage.value = true
     }
   }
 
   function update(event?: StorageEvent) {
-    if (event && event.key !== key)
-      return
+    if (event && event.key !== key) return
     data.value = read(event)
   }
 }

@@ -7,8 +7,7 @@ import type { MaybeRef } from '../utils'
  * @param objRef
  */
 export function toRefs<T extends object>(objRef: MaybeRef<T>): ToRefs<T> {
-  if (!isRef(objRef))
-    return _toRefs(objRef)
+  if (!isRef(objRef)) return _toRefs(objRef)
 
   const result: any = Array.isArray(objRef.value)
     ? new Array(objRef.value.length)
@@ -24,8 +23,7 @@ export function toRefs<T extends object>(objRef: MaybeRef<T>): ToRefs<T> {
           const copy: any = [...objRef.value]
           copy[key] = v
           objRef.value = copy
-        }
-        else {
+        } else {
           const newObj = { ...objRef.value, [key]: v }
           Object.setPrototypeOf(newObj, objRef.value)
           objRef.value = newObj

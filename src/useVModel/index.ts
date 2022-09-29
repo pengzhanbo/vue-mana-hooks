@@ -3,7 +3,6 @@ import { computed, getCurrentInstance, ref, watch } from 'vue'
 import { cloneJson, isDef, isFunction } from '../utils'
 
 export interface UseVModelOptions<T> {
-
   /**
    * @default false
    */
@@ -41,7 +40,7 @@ export function useVModel<P extends object, K extends keyof P>(
   props: P,
   key?: K,
   emit?: (name: string, ...args: any[]) => void,
-  options: UseVModelOptions<P[K]> = {},
+  options: UseVModelOptions<P[K]> = {}
 ) {
   const {
     clone = true,
@@ -53,16 +52,12 @@ export function useVModel<P extends object, K extends keyof P>(
 
   const vm = getCurrentInstance()
   const _emit = emit || vm?.emit
-  key = key || 'modelValue' as K
+  key = key || ('modelValue' as K)
   const event: string = eventName || `update:${key.toString()}`
-  const cloneFn = (v: P[K]) => !clone
-    ? v
-    : isFunction(clone)
-      ? clone(v)
-      : cloneJson(v)
-  const getValue = () => isDef(props[key!])
-    ? cloneFn(props[key!])
-    : defaultValue
+  const cloneFn = (v: P[K]) =>
+    !clone ? v : isFunction(clone) ? clone(v) : cloneJson(v)
+  const getValue = () =>
+    isDef(props[key!]) ? cloneFn(props[key!]) : defaultValue
 
   if (passive) {
     const initialValue = getValue()
@@ -70,21 +65,19 @@ export function useVModel<P extends object, K extends keyof P>(
 
     watch(
       () => props[key!],
-      v => proxy.value = cloneFn(v) as UnwrapRef<P[K]>,
+      (v) => (proxy.value = cloneFn(v) as UnwrapRef<P[K]>)
     )
 
     watch(
       proxy,
       (v) => {
-        if (v !== props[key!] || deep)
-          _emit!(event, v)
+        if (v !== props[key!] || deep) _emit!(event, v)
       },
-      { deep },
+      { deep }
     )
 
     return proxy
-  }
-  else {
+  } else {
     return computed<P[K]>({
       get() {
         return getValue()!

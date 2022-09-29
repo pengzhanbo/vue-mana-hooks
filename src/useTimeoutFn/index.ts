@@ -12,7 +12,7 @@ export interface UseTimeoutFnOptions {
 export function useTimeoutFn(
   fn: (...args: unknown[]) => void,
   interval: MaybeComputedRef<number> = 1000,
-  options: UseTimeoutFnOptions = {},
+  options: UseTimeoutFnOptions = {}
 ): Stoppable {
   const { immediate = true } = options
   const isPending = ref(false)
@@ -42,8 +42,7 @@ export function useTimeoutFn(
 
   if (immediate) {
     isPending.value = true
-    if (isClient)
-      start()
+    if (isClient) start()
   }
 
   tryOnScopeDispose(stop)

@@ -1,9 +1,8 @@
 import { ref } from 'vue'
-import type { Pauseable } from '../utils/types'
 import { isClient, tryOnScopeDispose } from '../utils'
+import type { Pauseable } from '../utils/types'
 
 export interface UseRafFnOptions {
-
   /**
    * 是否立即启动 requestAnimationFrame loop
    * @default true
@@ -20,7 +19,7 @@ export interface UseRafFnOptions {
  */
 export function useRafFn(
   fn: () => void,
-  options: UseRafFnOptions = {},
+  options: UseRafFnOptions = {}
 ): Pauseable {
   const { immediate = true } = options
 
@@ -28,8 +27,7 @@ export function useRafFn(
   let rafId: number | null = null
 
   function loop() {
-    if (!isActive.value || !isClient)
-      return
+    if (!isActive.value || !isClient) return
 
     fn()
 
@@ -51,8 +49,7 @@ export function useRafFn(
     }
   }
 
-  if (immediate)
-    resume()
+  if (immediate) resume()
 
   tryOnScopeDispose(pause)
 

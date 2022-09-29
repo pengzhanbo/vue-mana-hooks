@@ -1,7 +1,7 @@
 import { resolve } from 'path'
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import jsx from '@vitejs/plugin-vue-jsx'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   resolve: {
@@ -10,9 +10,7 @@ export default defineConfig({
     },
   },
   root: resolve(__dirname, 'demo'),
-  plugins: [
-    vue(), jsx(),
-  ],
+  plugins: [vue(), jsx()],
   server: {
     host: '0.0.0.0',
   },

@@ -27,12 +27,9 @@ export interface UseIntervalFnOPtions {
 export function useIntervalFn(
   fn: () => void,
   interval: MaybeComputedRef<number> = 1000,
-  options: UseIntervalFnOPtions = {},
+  options: UseIntervalFnOPtions = {}
 ): Pauseable {
-  const {
-    immediate = true,
-    immediateCallback = false,
-  } = options
+  const { immediate = true, immediateCallback = false } = options
 
   let timer: ReturnType<typeof setInterval> | null = null
   const isActive = ref(false)
@@ -49,22 +46,19 @@ export function useIntervalFn(
   }
 
   function resume() {
-    if (unref(interval) <= 0)
-      return
+    if (unref(interval) <= 0) return
     isActive.value = true
-    if (immediateCallback)
-      fn()
+    if (immediateCallback) fn()
+
     clean()
     timer = setInterval(fn, resolveUnref(interval))
   }
 
-  if (immediate && isClient)
-    resume()
+  if (immediate && isClient) resume()
 
   if (isRef(interval)) {
     const stopWatch = watch(interval, () => {
-      if (isActive.value && isClient)
-        resume()
+      if (isActive.value && isClient) resume()
     })
     tryOnScopeDispose(stopWatch)
   }

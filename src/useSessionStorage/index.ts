@@ -1,6 +1,6 @@
-import type { MaybeComputedRef, RemovableRef } from '../utils'
 import { useStorage } from '../useStorage'
 import type { UseStorageOptions } from '../useStorage'
+import type { MaybeComputedRef, RemovableRef } from '../utils'
 export function useSessionStorage(
   key: string,
   defaults: MaybeComputedRef<string>,
@@ -34,10 +34,12 @@ export function useSessionStorage<T = unknown>(
  * @param options
  * @returns
  */
-export function useSessionStorage<T extends (string | number | boolean | object | null)>(
+export function useSessionStorage<
+  T extends string | number | boolean | object | null
+>(
   key: string,
   defaults: MaybeComputedRef<T>,
-  options: UseStorageOptions<T> = {},
+  options: UseStorageOptions<T> = {}
 ): RemovableRef<T> {
   return useStorage(key, defaults, window.sessionStorage, options)
 }

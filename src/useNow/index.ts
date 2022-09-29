@@ -5,7 +5,6 @@ import { useRafFn } from '../useRafFn'
 import type { Pauseable } from '../utils'
 
 export interface UseNowOptions {
-
   /**
    * @default false
    */
@@ -31,19 +30,19 @@ export function useNow(options: UseNowOptions = {}) {
 
   const now = ref(new Date())
 
-  const update = () => now.value = new Date()
+  const update = () => (now.value = new Date())
 
-  const controls: Pauseable = interval === 'requestAnimationFrame'
-    ? useRafFn(update, { immediate: true })
-    : useIntervalFn(update, interval, { immediate: true })
+  const controls: Pauseable =
+    interval === 'requestAnimationFrame'
+      ? useRafFn(update, { immediate: true })
+      : useIntervalFn(update, interval, { immediate: true })
 
   if (exportControls) {
     return {
       now,
       ...controls,
     }
-  }
-  else {
+  } else {
     return now
   }
 }
