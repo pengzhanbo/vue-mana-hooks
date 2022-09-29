@@ -1,0 +1,51 @@
+{
+  "name": "vue-mana-hooks",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Vue3 hooks",
+  "homepage": "https://github.com/pengzhanbo/vue-mana-hooks",
+  "repository": {
+    "url": "https://github.com/pengzhanbo/vue-mana-hooks",
+    "type": "git"
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "dist/index.d.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsup"
+  },
+  "tsup": {
+    "entry": ["src/index.ts"],
+    "format": ["esm", "cjs"],
+    "splitting": false,
+    "sourcemap": false,
+    "clean": true,
+    "dts": true
+  },
+  "dependencies": {
+    "vue": "^3.2.40"
+  },
+  "devDependencies": {
+    "@pengzhanbo/eslint-config": "^0.1.2",
+    "@pengzhanbo/prettier-config": "^0.1.3",
+    "@types/node": "^18.7.23",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vitejs/plugin-vue-jsx": "^2.0.1",
+    "eslint": "^8.24.0",
+    "prettier": "^2.7.1",
+    "tsup": "^6.2.3",
+    "typescript": "^4.8.4",
+    "vite": "^3.1.3"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  }
+}
