@@ -23,8 +23,13 @@
     "build": "tsup"
   },
   "tsup": {
-    "entry": ["src/index.ts"],
-    "format": ["esm", "cjs"],
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "esm",
+      "cjs"
+    ],
     "splitting": false,
     "sourcemap": false,
     "clean": true,
@@ -36,7 +41,8 @@
   },
   "devDependencies": {
     "@pengzhanbo/eslint-config": "^0.1.4",
-    "@pengzhanbo/prettier-config": "^0.1.4",
+    "@pengzhanbo/eslint-config-ts": "^0.2.3",
+    "@pengzhanbo/prettier-config": "^0.2.3",
     "@types/node": "^18.7.23",
     "@vitejs/plugin-vue": "^3.1.0",
     "@vitejs/plugin-vue-jsx": "^2.0.1",
