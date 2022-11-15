@@ -1,8 +1,9 @@
-import { tryOnScopeDispose } from '@vue-mana-hooks/utils'
+import type { MaybeElementRef } from '@vue-mana-hooks/utils'
+import { tryOnScopeDispose, unrefElement } from '@vue-mana-hooks/utils'
 import { ref, watch } from 'vue'
 
 export function useMutationObserver(
-  target: Element,
+  target: MaybeElementRef,
   callback: MutationCallback,
   options: MutationObserverInit = {}
 ) {
@@ -17,7 +18,7 @@ export function useMutationObserver(
   }
 
   const stopWatch = watch(
-    () => target,
+    () => unrefElement(target),
     (el) => {
       cleanup()
       if (isSupported.value && el) {

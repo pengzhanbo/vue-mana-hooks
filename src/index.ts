@@ -19,3 +19,6 @@ export * from './useVModels'
 
 // toRefs
 export * from './toRefs'
+
+// dom
+export * from './useTitle'
