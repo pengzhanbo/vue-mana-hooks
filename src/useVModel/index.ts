@@ -40,7 +40,7 @@ export function useVModel<P extends object, K extends keyof P>(
   props: P,
   key?: K,
   emit?: (name: string, ...args: any[]) => void,
-  options: UseVModelOptions<P[K]> = {}
+  options: UseVModelOptions<P[K]> = {},
 ) {
   const {
     clone = true,
@@ -65,7 +65,7 @@ export function useVModel<P extends object, K extends keyof P>(
 
     watch(
       () => props[key!],
-      (v) => (proxy.value = cloneFn(v) as UnwrapRef<P[K]>)
+      (v) => (proxy.value = cloneFn(v) as UnwrapRef<P[K]>),
     )
 
     watch(
@@ -73,7 +73,7 @@ export function useVModel<P extends object, K extends keyof P>(
       (v) => {
         if (v !== props[key!] || deep) _emit!(event, v)
       },
-      { deep }
+      { deep },
     )
 
     return proxy

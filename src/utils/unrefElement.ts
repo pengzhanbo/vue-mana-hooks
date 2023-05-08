@@ -19,7 +19,7 @@ export type UnRefElementReturn<T extends MaybeElement = MaybeElement> =
     : T | undefined
 
 export function unrefElement<T extends MaybeElement>(
-  elRef: MaybeComputedElementRef<T>
+  elRef: MaybeComputedElementRef<T>,
 ): UnRefElementReturn<T> {
   const plain = resolveUnref(elRef)
   return (plain as ComponentPublicInstance).$el ?? plain

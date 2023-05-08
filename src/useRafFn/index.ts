@@ -19,7 +19,7 @@ export interface UseRafFnOptions {
  */
 export function useRafFn(
   fn: () => void,
-  options: UseRafFnOptions = {}
+  options: UseRafFnOptions = {},
 ): Pauseable {
   const { immediate = true } = options
 

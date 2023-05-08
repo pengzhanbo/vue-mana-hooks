@@ -5,7 +5,7 @@ import { ref, watch } from 'vue'
 export function useMutationObserver(
   target: MaybeElementRef,
   callback: MutationCallback,
-  options: MutationObserverInit = {}
+  options: MutationObserverInit = {},
 ) {
   let observer: MutationObserver | undefined
   const isSupported = ref('MutationObserver' in window)
@@ -26,7 +26,7 @@ export function useMutationObserver(
         observer.observe(el, options)
       }
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   const stop = () => {

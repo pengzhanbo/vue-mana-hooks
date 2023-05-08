@@ -11,7 +11,7 @@ import { useVModel } from '../useVModel'
 export function useVModels<P extends object>(
   props: P,
   emit?: (name: string, ...args: any[]) => void,
-  options: UseVModelOptions<any> = {}
+  options: UseVModelOptions<any> = {},
 ): ToRefs<P> {
   const ret: any = {}
 

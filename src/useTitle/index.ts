@@ -9,7 +9,7 @@ export interface UseTitleOptions {
 }
 export function useTitle(
   initialTitle: MaybeComputedRef<string | null | undefined> = null,
-  options: UseTitleOptions = {}
+  options: UseTitleOptions = {},
 ) {
   const title: WritableComputedRef<string | null | undefined> =
     resolveRef(initialTitle)
@@ -22,7 +22,7 @@ export function useTitle(
         document.title = t ?? ''
       }
     },
-    { immediate: true }
+    { immediate: true },
   )
 
   if (options.observer && !isReadOnly) {
@@ -33,7 +33,7 @@ export function useTitle(
           title.value = document.title
         }
       },
-      { childList: true }
+      { childList: true },
     )
   }
 

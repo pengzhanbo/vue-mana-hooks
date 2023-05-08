@@ -1,4 +1,4 @@
-import { isRef, ref, unref, watch } from 'vue'
+import { isRef, ref, watch } from 'vue'
 import type { MaybeComputedRef, Pauseable } from '../utils'
 import { isClient, resolveUnref, tryOnScopeDispose } from '../utils'
 
@@ -27,7 +27,7 @@ export interface UseIntervalFnOPtions {
 export function useIntervalFn(
   fn: () => void,
   interval: MaybeComputedRef<number> = 1000,
-  options: UseIntervalFnOPtions = {}
+  options: UseIntervalFnOPtions = {},
 ): Pauseable {
   const { immediate = true, immediateCallback = false } = options
 
@@ -46,7 +46,7 @@ export function useIntervalFn(
   }
 
   function resume() {
-    if (unref(interval) <= 0) return
+    if (resolveUnref(interval) <= 0) return
     isActive.value = true
     if (immediateCallback) fn()
 
