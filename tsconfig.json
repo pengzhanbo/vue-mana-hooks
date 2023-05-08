@@ -4,10 +4,7 @@
     "module": "es2020",
     "declaration": true,
     "jsx": "preserve",
-    "lib": [
-      "DOM",
-      "ES2020"
-    ],
+    "lib": ["DOM", "ES2020"],
     "target": "ES2018",
     "skipLibCheck": true,
     "strict": true,
