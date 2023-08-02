@@ -37,19 +37,19 @@
   },
   "prettier": "@pengzhanbo/prettier-config",
   "dependencies": {
-    "vue": "^3.2.47"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@pengzhanbo/eslint-config": "^0.3.11",
-    "@pengzhanbo/prettier-config": "^0.3.11",
-    "@types/node": "^18.16.5",
-    "@vitejs/plugin-vue": "^4.2.1",
+    "@pengzhanbo/eslint-config": "^0.4.2",
+    "@pengzhanbo/prettier-config": "^0.4.2",
+    "@types/node": "^18.17.1",
+    "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "eslint": "^8.40.0",
-    "prettier": "^2.8.8",
-    "tsup": "^6.7.0",
-    "typescript": "^5.0.4",
-    "vite": "^4.3.5"
+    "eslint": "^8.46.0",
+    "prettier": "^3.0.0",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.8"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
